@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="Customers" Class="FunctionsDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="AppSettings" ConnectionString="Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\Customers.mdf;Integrated Security=True" SettingsObjectName="CustomerScentManager.My.MySettings" SettingsPropertyName="CustomersConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.cm_customers" Member="cm_customers">
+    <Type Name="cm_customer">
+      <Column Name="customerID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="Email" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="Address" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="Telephone" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="Added" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Association Name="cm_customer_cm_customer_product" Member="cm_customer_products" ThisKey="customerID" OtherKey="customerID" Type="cm_customer_product" />
+    </Type>
+  </Table>
+  <Table Name="dbo.cm_products" Member="cm_products">
+    <Type Name="cm_product">
+      <Column Name="productID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="ProductName" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="ProductScent" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="ProductSize" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="ProductColor" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="BonusTester" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="OtherDetails" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="Created" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="AddedBy" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Association Name="cm_product_cm_customer_product" Member="cm_customer_products" ThisKey="productID" OtherKey="productID" Type="cm_customer_product" />
+    </Type>
+  </Table>
+  <Table Name="dbo.cm_users" Member="cm_users">
+    <Type Name="cm_user">
+      <Column Name="userID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Username" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="Password" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="Created" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.cm_customer_product" Member="cm_customer_products">
+    <Type Name="cm_customer_product">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="productID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="customerID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Added" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Association Name="cm_customer_cm_customer_product" Member="cm_customer" ThisKey="customerID" OtherKey="customerID" Type="cm_customer" IsForeignKey="true" />
+      <Association Name="cm_product_cm_customer_product" Member="cm_product" ThisKey="productID" OtherKey="productID" Type="cm_product" IsForeignKey="true" />
+    </Type>
+  </Table>
+</Database>
